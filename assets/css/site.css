@@ -220,8 +220,14 @@ strong { font-weight: 700; }
 .hero .wrap { position: relative; }
 
 .hero h1 { margin-bottom: 0.25em; }
+/* Home headline: "Every [word] looks the same." always stays on one line.
+   Font size = available width / line length in ems (14.1), capped at 4.6rem. */
+#hero-title { font-size: min(4.6rem, calc((100vw - 2 * clamp(1.25rem, 4vw, 2.5rem)) / 14.1)); }
+#hero-title .hero__line:first-child { white-space: nowrap; }
 .hero__line { display: block; }
 
+/* Rotating word: every word stacks in one grid cell, so the box is as wide as
+   the longest word and the shorter words sit centered inside it. */
 .rotator {
   display: inline-grid;
   vertical-align: bottom;
@@ -229,10 +235,10 @@ strong { font-weight: 700; }
 }
 .rotator > span {
   grid-area: 1 / 1;
+  text-align: center;
   opacity: 0;
   transform: translateY(0.35em);
   transition: opacity 0.45s ease, transform 0.45s ease;
-  text-align: left;
 }
 .rotator > span.is-active { opacity: 1; transform: none; }
 
